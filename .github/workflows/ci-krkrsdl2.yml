@@ -233,7 +233,7 @@
       ]
     },
     "build-macos-cmake" : {
-      "runs-on" : "macos-11",
+      "runs-on" : "macos-14",
       "timeout-minutes" : 20,
       "steps" : [
         {
@@ -249,7 +249,10 @@
         },
         {
           "name" : "Configure project",
-          "run" : "cmake -S . -B build"
+          "run" : "cmake -S . -B build",
+          "env" : {
+            "CMAKE_OSX_ARCHITECTURES":"x86_64;arm64"
+          }
         },
         {
           "name" : "Build project",
@@ -282,7 +285,7 @@
       "steps" : [
         {
           "name" : "Download all artifacts",
-          "uses" : "actions/download-artifact@v3"
+          "uses" : "actions/download-artifact@v4"
         },
         {
           "name" : "Prepare artifacts for release",
